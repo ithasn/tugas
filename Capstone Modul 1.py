@@ -83,14 +83,15 @@ def actionPlan(dictData):
                 actionPlan = 'Hubungi penyewa'
             listValues[i][4] = str(durasiSewa) + ' hari'
 
-        listValues[i].append(actionPlan) # Menambahkan variabel actionPlan ke ujung list (index)
+        # Menambahkan kolom 'Action Plan' pada tabel
+        listValues[i].append(actionPlan) 
 
     # Menambah kolom pada headers mengikuti penambahan kolom pada values
     headers = list(dictData.keys()) + ['Action Plan']
     headers.insert(5,'Pengembalian')
 
     ziplistValues = [list(index) for index in zip(*listValues)] # Transpose tabel data
-    dictDataModified = dict(zip(headers, ziplistValues)) # Mengubah list menjadi dictionary dengan headers sebagai keys dan ziplistValues sebagai values
+    dictDataModified = dict(zip(headers, ziplistValues)) # Mengubah format list menjadi dictionary dengan headers sebagai keys dan ziplistValues sebagai values
 
     return dictDataModified
 
@@ -194,7 +195,7 @@ def inputTanggal(str):
                     else:
                         cekHari = False
                 elif intBulan in [2]:
-                    if 1 <= intHari >= 28:
+                    if 1 <= intHari <= 28:
                         cekHari = True
                     else:
                         cekHari = False
@@ -364,7 +365,7 @@ def updateValues(dictData):
                     lanjutUpdate = input('Lanjutkan update (y/t)?: ')
                     print()
 
-                    if lanjutUpdate == 'y':
+                    if lanjutUpdate == 'y': # Lanjutkan update
                         namaKolom = input('Masukkan nama kolom yang ingin diupdate: ').title()
                         print()
 
@@ -492,8 +493,7 @@ def updateValues(dictData):
                             print('Mohon periksa kembali, tidak ada nama kolom tersebut\n')
                 
 
-                    elif lanjutUpdate == 't':
-                        # Kembali ke menu update
+                    elif lanjutUpdate == 't': # Kembali ke menu update
                         break
 
                     else:
@@ -529,8 +529,7 @@ def deleteData(dictData):
                     delData = input('Apakah anda yakin ingin menghapus data (y/t)?: ')
                     print()
 
-                    if delData == 'y':
-                        # Menghapus values di index nopol yang diinput pada setiap keys
+                    if delData == 'y': # Menghapus values di index nopol yang diinput pada setiap keys
                         for key in dictData:
                             del dictData[key][index]
                         print('Data berhasil dihapus!\n')
